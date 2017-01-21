@@ -11,6 +11,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Layout.css';
 import Header from '../Header';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class Layout extends React.Component {
   static propTypes = {
@@ -19,10 +20,12 @@ class Layout extends React.Component {
 
   render() {
     return (
+        <MuiThemeProvider>
       <div>
-        <Header />
-        {this.props.children}
+          <Header />
+          {this.props.children}
       </div>
+        </MuiThemeProvider>
     );
   }
 }
