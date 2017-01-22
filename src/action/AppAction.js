@@ -1,7 +1,7 @@
-import AppDispatcher from '../core/AppDispatcher'
-import constants from '../constants/constants'
-import Promise from 'promise'
-let agent = require('superagent-promise')(require('superagent'), Promise)
+import AppDispatcher from '../core/AppDispatcher';
+import constants from '../constants/constants';
+import Promise from 'promise';
+const agent = require('superagent-promise')(require('superagent'), Promise);
 
 class CountryActions {
 
@@ -24,4 +24,4 @@ class CountryActions {
   // }
 }
 
-export default new CountryActions()
+export default new CountryActions();

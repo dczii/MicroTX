@@ -1,15 +1,15 @@
-import Dispatcher from '../core/AppDispatcher'
-import constants from '../constants/constants'
-import BaseStore from './BaseStore'
-import _ from 'lodash'
-import Immutable from 'immutable'
+import Dispatcher from '../core/AppDispatcher';
+import constants from '../constants/constants';
+import BaseStore from './BaseStore';
+import _ from 'lodash';
+import Immutable from 'immutable';
 
 // Facebook style store creation.
 class AppStore extends BaseStore {
   data = 'test'
 
   getData() {
-    return this.data
+    return this.data;
   }
 
   // getStateValues(countryName) {
@@ -33,16 +33,16 @@ class AppStore extends BaseStore {
 
 }
 
-let appStore = new AppStore()
+const appStore = new AppStore();
 appStore.dispatchToken = Dispatcher.register((action) => {
-  let type = action.type
+  const type = action.type;
 
-  switch(type) {
+  switch (type) {
     case ActionTypes.COUNTRY_CHANGE_EVENT:
-    appStore.setCountries(action.values)
-    appStore.emitChange()
-    break
+      appStore.setCountries(action.values);
+      appStore.emitChange();
+      break;
   }
-})
+});
 
-export default appStore
+export default appStore;

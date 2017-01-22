@@ -20,12 +20,12 @@ class Layout extends React.Component {
 
   render() {
     return (
-        <MuiThemeProvider>
-      <div>
+      <MuiThemeProvider>
+        <div>
           <Header />
           {this.props.children}
-      </div>
-        </MuiThemeProvider>
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
