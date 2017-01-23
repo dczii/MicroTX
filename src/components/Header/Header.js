@@ -17,7 +17,7 @@ class Header extends React.Component {
     return (
       <div style={{ textAlign: 'center' }}>
         <p style={{ fontSize: 24, fontWeight: ' bold' }}>
-          MediaShaker Test
+          Mediashaker test
         </p>
       </div>
     );

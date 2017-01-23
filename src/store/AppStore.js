@@ -6,10 +6,14 @@ import Immutable from 'immutable';
 
 // Facebook style store creation.
 class AppStore extends BaseStore {
-  data = 'test'
+  data = []
 
   getData() {
     return this.data;
+  }
+
+  setPosts(newData) {
+    data = newData;
   }
 
   // getStateValues(countryName) {

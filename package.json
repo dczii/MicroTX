@@ -28,6 +28,7 @@
     "keymirror": "^0.1.1",
     "lodash": "^4.17.4",
     "material-ui": "^0.16.7",
+    "mdi": "^1.8.36",
     "node-fetch": "^1.6.3",
     "normalize.css": "^5.0.0",
     "passport": "^0.3.2",
