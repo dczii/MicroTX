@@ -13,7 +13,7 @@ class AppStore extends BaseStore {
   }
 
   setPosts(newData) {
-    data = newData;
+    this.data = newData;
   }
 
   // getStateValues(countryName) {
@@ -38,12 +38,12 @@ class AppStore extends BaseStore {
 }
 
 const appStore = new AppStore();
-appStore.dispatchToken = Dispatcher.register((action) => {
-  const type = action.type;
+Dispatcher.register((payload) => {
+  const action = payload.action;
 
-  switch (type) {
-    case ActionTypes.COUNTRY_CHANGE_EVENT:
-      appStore.setCountries(action.values);
+  switch (action.actionType) {
+    case constants.SET_POST:
+      appStore.setPosts(action.data);
       appStore.emitChange();
       break;
   }

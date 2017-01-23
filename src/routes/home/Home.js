@@ -29,12 +29,19 @@ class Home extends React.Component {
     };
   }  
 
-  // componentDidMount() => {
-    
-  // }
-  // componentWillMount() => {
+  componentDidMount() {
+    AppStore.addChangeListener(this.onAppStoreChange);
+  }
 
-  // }
+  componentWillUnmount() {
+    AppStore.removeChangeListener(this.onAppStoreChange);
+  }
+
+  onAppStoreChange = () => {
+    let newData =  AppStore.getData();
+    let selectedData = _.find(newData, (data) => data.title == this.state.selectedData.title)
+    this.setState({data: newData})
+  }
 
   //Set value for the Text Fields
   onTextChange = (field, e, i , v) => {
@@ -46,8 +53,8 @@ class Home extends React.Component {
   onPost = () => {
     let newData = this.state.data
     newData.push({title: this.state.title, content: this.state.content, comment: []})
-    this.setState({data: newData, title: '', content: ''})
-      // AppAction.setPost(this.state.data)
+    this.setState({data: newData, title: '', content: ''},
+      AppAction.setPost(this.state.data))
   }
 
   //Function when a post is Selected
@@ -69,14 +76,14 @@ class Home extends React.Component {
   //Function when commenting
   onPostComment = () => {
     let comment = this.state.comment
+    let data = this.state.data
     let selectedData = this.state.selectedData
-    let variables = {name: comment.name, body: comment.body}
-    selectedData.comment.push(variables)
 
-    //push to data
-    let dataIdx = _.findIndex(this.state.data, (d) => d.title==selectedData.title)
-    this.state.data[dataIdx].comment.push(variables)
-    this.setState({selectedData: selectedData, comment: {name: '', body: ''}})
+    //push posts comment to store
+    let dataIdx = _.findIndex(data, (d) => d.title==selectedData.title)
+    data[dataIdx].comment.push({name: comment.name, body: comment.body})
+    this.setState({comment: {name: '', body: ''}},
+      AppAction.setPost(data))
   }
 
   render() {

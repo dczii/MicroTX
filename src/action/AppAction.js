@@ -3,17 +3,16 @@ import constants from '../constants/constants';
 
 class AppActions {
 
-  // setPost = (data) => {
-  //   .then((res) => {
-  //     AppDispatcher({
-  //       body: data,
-  //       type: constants.SET_POSTS,
-  //       payload: {
-  //         res
-  //       }
-  //     });
-  //   });
-  // }
+  setPost = (data) => {
+      // return {
+      //   type: constants.SET_POST,
+      //   payload: data
+      // };
+    AppDispatcher.handleAction({
+      actionType: constants.SET_POST,
+      data: data
+    })
+  }
 
 
 }
