@@ -29,6 +29,8 @@ class Html extends React.Component {
           <title>Mediashaker Task</title>
           <meta name="description" content={description} />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link href="css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
+          <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css" />
           <link rel="apple-touch-icon" href="apple-touch-icon.png" />
           {style && <style id="css" dangerouslySetInnerHTML={{ __html: style }} />}
         </head>

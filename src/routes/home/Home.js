@@ -6,6 +6,7 @@ import AppAction from '../../action/AppAction';
 import _ from 'lodash'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -39,8 +40,8 @@ class Home extends React.Component {
 
   onAppStoreChange = () => {
     let newData =  AppStore.getData();
-    let selectedData = _.find(newData, (data) => data.title == this.state.selectedData.title)
-    this.setState({data: newData})
+    let newSelectedData = _.find(newData, (data) => data.title == this.state.selectedData.title)
+    this.setState({data: newData, selectedData: newSelectedData})
   }
 
   //Set value for the Text Fields
@@ -86,19 +87,36 @@ class Home extends React.Component {
       AppAction.setPost(data))
   }
 
+  //function to delete post
+  onDeletePost = (title) => {
+    let data = _.reject(this.state.data, (data) => data.title == title)
+    AppAction.setPost(data)
+  }
+
+  //function to delete comment
+  onDeleteComment = (name) => {
+    let data = this.state.data
+    let idx = _.findIndex(data, (d) => d.title == this.state.selectedData.title)
+    let comment = _.reject(data[idx].comment, (d) => d.name == name)
+    let newData = _.set(data, [idx]+'.comment', comment)
+    AppAction.setPost(newData)
+  }
+
   render() {
     return (
       this.state.view === 'lists' ? 
         <div>
           {/*List of Posts*/}
-            {_.map(this.state.data, (data) => {
+            {_.map(this.state.data, (data, idx) => {
               return(
-                <div className={s.postsContainer}>
+                <div key={idx} className={s.postsContainer}>
                   <p className={s.postTitle}
                     onClick={this.onSelectPost.bind(this, data.title, data.content, data.comment)}>
                     {_.camelCase(data.title)}
                   </p>
                   <span className={s.postContent}>{data.content}</span>
+                  <RaisedButton label="X" className={s.delBtnStyle} 
+                    onClick={this.onDeletePost.bind(this, data.title)}/>
                 </div>
               );
             })}
@@ -128,15 +146,19 @@ class Home extends React.Component {
             </div>
             {/*Comments Section*/}
             <div className={s.commentSectionContainer}>
-              {_.map(this.state.selectedData.comment, (comment) => {
+              {_.map(this.state.selectedData.comment, (comment, idx) => {
                 return(
-                  <div className={s.commentContainer}>
-                    <span className={s.commentTitle}>{comment.name}</span>
-                    <span className={s.comment}>{comment.body}</span>
+                  <div key={idx} className={s.commentContainer}>
+                    <div style={{verticalAlign: 'middle'}}>
+                      <span className={s.commentTitle}>{comment.name}</span>
+                      <span className={s.comment}>{comment.body}</span>
+                    </div>
+                    <FlatButton label="X" style={{float: 'right'}}
+                      onClick={this.onDeleteComment.bind(this, comment.name)}/>
                   </div>
                 );
               })}
-              <div className={s.commentContainer}>
+              <div>
                 <TextField fullWidth
                   hintText='Write your name'
                   value={this.state.comment.name}
