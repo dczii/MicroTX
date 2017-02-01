@@ -40,7 +40,10 @@ class Home extends React.Component {
 
   onAppStoreChange = () => {
     let newData =  AppStore.getData();
-    let newSelectedData = _.find(newData, (data) => data.title == this.state.selectedData.title)
+    let newSelectedData = {}
+    if(this.state.selectedData) {
+      newSelectedData = _.find(newData, (data) => data.title == this.state.selectedData.title)
+    }
     this.setState({data: newData, selectedData: newSelectedData})
   }
 
