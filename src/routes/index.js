@@ -27,7 +27,7 @@ export default {
     const route = await next();
 
     // Provide default values for title, description etc.
-    route.title = 'Mediashaker Test';
+    route.title = 'Editable Forms';
     route.description = route.description || '';
 
     return route;
