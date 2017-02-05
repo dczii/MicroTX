@@ -1,7 +1,6 @@
-## mediashakertest
-Editable Forms
-Created by: Danilo Zabala II
-Latest Update: February 3, 2017
+## MicroTX
+This repository is for Testing purposes only.
+Re-designing MicroTX Interface
 
 #To install
 $ npm install

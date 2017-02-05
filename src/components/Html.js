@@ -10,6 +10,7 @@
 import React, { PropTypes } from 'react';
 import { analytics } from '../config';
 
+
 class Html extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
@@ -33,18 +34,8 @@ class Html extends React.Component {
           {style && <style id="css" dangerouslySetInnerHTML={{ __html: style }} />}
         </head>
         <body>
-          <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
+          <div id="app"style={{margin: '-8px', marginTop: '-16px'}} />
           {scripts && scripts.map(script => <script key={script} src={script} />)}
-          {analytics.google.trackingId &&
-            <script
-              dangerouslySetInnerHTML={{ __html:
-              'window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;' +
-              `ga('create','${analytics.google.trackingId}','auto');ga('send','pageview')` }}
-            />
-          }
-          {analytics.google.trackingId &&
-            <script src="https://www.google-analytics.com/analytics.js" async defer />
-          }
         </body>
       </html>
     );
